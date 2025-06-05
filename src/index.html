@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AniVibes – Mood-based Anime Watch Party Planner">
+    <title>
+      AniVibes
+    </title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1>AniVibes 🍿✨</h1>
+      <p>Plan your perfect anime night based on your mood.</p>
+    </header>
+
+    <main>
+      <section id="mood-selector">
+        <h2>Select Your Mood</h2>
+        <div class="mood-options">
+          <!-- Mood buttons will be injected here by MoodSelector.mjs -->
+        </div>
+      </section>
+
+      <section id="genre-filter">
+        <h2>Choose Genre</h2>
+        <div class="genre-options">
+          <!-- Genre filters will be dynamically generated -->
+        </div>
+      </section>
+
+      <section id="anime-list">
+        <h2>Anime Recommendations</h2>
+        <div class="anime-cards">
+          <!-- Anime cards will be inserted here by AnimeList.mjs -->
+        </div>
+      </section>
+
+      <section id="snack-suggestions">
+        <h2>Snack Pairings</h2>
+        <div class="snack-list">
+          <!-- Snack cards will appear here from SnackSuggestor.mjs -->
+        </div>
+      </section>
+
+      <section id="watchlist">
+        <h2>Your Watchlist</h2>
+        <ul class="watchlist-items">
+          <!-- Watchlist items populated via WatchlistManager.mjs -->
+        </ul>
+        <button id="generate-session">Generate Watch Party Plan 🎉</button>
+      </section>
+
+      <section id="session-plan">
+        <h2>Your Anime Night Plan</h2>
+        <div class="session-output">
+          <!-- Timeline of anime and snacks generated here -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 AniVibes. Powered by anime, snacks, and JavaScript 💖</p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+
+</html>
