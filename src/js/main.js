@@ -2,6 +2,7 @@
 
 import { fetchAnimeByMood, fetchSnacksByMood } from './js/APIManager.mjs';
 import { setupMoodSelector } from './js/MoodSelector.mjs';
+import { renderMoodOptions, setDefaultMood } from './js/MoodSelector.mjs';
 import { renderAnimeList } from './js/AnimeList.mjs';
 import { renderSnackSuggestions } from './js/SnackSuggestor.mjs';
 import { setupWatchlist } from './js/WatchlistManager.mjs';
@@ -18,18 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`Selected Mood: ${selectedMood}, Genre: ${selectedGenre}`);
 
     const animeResults = await fetchAnimeByMood(selectedMood, selectedGenre);
-    renderAnimeList(animeResults);
+    renderAnimeList('anime-list', animeResults);
 
     const snackResults = await fetchSnacksByMood(selectedMood);
-    renderSnackSuggestions(snackResults);
+    renderSnackSuggestions('snack-suggestions', snackResults);
   });
 
   // Load existing watchlist from storage
   setupWatchlist();
 
   // Initialize session planner functionality
-  buildSessionTimeline();
-
+    document.getElementById('generate-session').addEventListener('click', () => {
+        const watchlist = WatchlistManager.getWatchlist();
+        const snacks = loadFromSomewhere(); // you may need to store this from `fetchSnacksByMood`
+        buildSessionTimeline('session-plan', watchlist, snacks);
+    });
   // UI enhancements
   initUIAnimations();
 });

@@ -13,8 +13,11 @@ const moodOptions = [
 
 let selectedMood = null;
 
-// Renders mood options to the UI\export function renderMoodOptions(containerId) {
-  const container = document.getElementById(containerId);
+// Renders mood options to the UI
+export function renderMoodOptions(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
   container.innerHTML = '';
 
   moodOptions.forEach((mood) => {
@@ -23,9 +26,10 @@ let selectedMood = null;
     button.textContent = `${mood.emoji} ${mood.label}`;
     button.setAttribute('data-mood', mood.label.toLowerCase());
     button.addEventListener('click', () => selectMood(mood.label.toLowerCase()));
-
     container.appendChild(button);
-});
+  });
+}
+
 
 // Handles mood selection and UI highlighting
 function selectMood(mood) {
@@ -46,4 +50,20 @@ export function getSelectedMood() {
 // Optionally preload with a default mood
 export function setDefaultMood(mood = 'relaxing') {
   selectMood(mood);
+}
+
+// Initializes the mood selector with event listener
+export function setupMoodSelector(callback) {
+  const container = document.querySelector('#mood-selector .mood-options');
+  renderMoodOptions('mood-selector');
+
+  // Set default mood
+  setDefaultMood();
+
+  // Listen for mood selection changes
+  document.addEventListener('moodSelected', (event) => {
+    const selectedMood = event.detail.mood;
+    const selectedGenre = null; // You can update this later when genre is hooked up
+    callback(selectedMood, selectedGenre);
+  });
 }
