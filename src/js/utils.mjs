@@ -12,3 +12,12 @@ export function loadHeaderFooter() {
       document.querySelector("footer").innerHTML = data;
     });
 }
+
+export function loadFromLocalStorage(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (error) {
+    console.error(`Error loading from localStorage: ${error}`);
+    return null;
+  }
+}

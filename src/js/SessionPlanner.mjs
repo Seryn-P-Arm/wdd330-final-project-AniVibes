@@ -1,8 +1,9 @@
 // SessionPlanner.mjs - Builds the anime + snack watch session timeline
 
 export function buildSessionTimeline(containerId, watchlist, snacks) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
+  const section = document.getElementById(containerId);
+  const container = section.querySelector('.session-output'); // 🎯 target correct inner container
+  container.innerHTML = ''; // Wipe the slate clean like a pro monk
 
   if (!watchlist || watchlist.length === 0) {
     container.innerHTML = '<p>Your session is empty. Add anime to get started!</p>';
@@ -20,18 +21,21 @@ export function buildSessionTimeline(containerId, watchlist, snacks) {
     const timeEstimate = anime.episodes ? anime.episodes * 24 : 0; // avg 24 min per ep
     totalTime += timeEstimate;
 
-    const snack = snacks[index] || null;
+    const snack = snacks && snacks[index] ? snacks[index] : null;
 
     block.innerHTML = `
       <h3>${anime.title}</h3>
       <p>Episodes: ${anime.episodes || 'N/A'}</p>
       <p>Estimated Time: ${timeEstimate} mins</p>
-      ${snack ? `
-        <div class="snack-pairing">
-          <img src="${snack.image}" alt="${snack.title}" class="snack-img">
-          <p><strong>Snack:</strong> ${snack.title}</p>
-        </div>
-      ` : '<p><em>No snack paired.</em></p>'}
+      ${
+        snack
+          ? `<div class="snack-pairing">
+              <img src="${snack.image}" alt="${snack.title}" class="snack-img" />
+              <p><strong>Snack:</strong> ${snack.title}</p>
+              <a href="${snack.sourceUrl}" target="_blank">View Recipe</a>
+            </div>`
+          : '<p><em>No snack paired. Bring your own chips?</em></p>'
+      }
     `;
 
     timeline.appendChild(block);

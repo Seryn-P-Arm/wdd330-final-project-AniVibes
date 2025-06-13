@@ -30,7 +30,6 @@ export function renderMoodOptions(containerSelector) {
   });
 }
 
-
 // Handles mood selection and UI highlighting
 function selectMood(mood) {
   selectedMood = mood;
@@ -55,7 +54,7 @@ export function setDefaultMood(mood = 'relaxing') {
 // Initializes the mood selector with event listener
 export function setupMoodSelector(callback) {
   const container = document.querySelector('#mood-selector .mood-options');
-  renderMoodOptions('mood-selector');
+  renderMoodOptions('.mood-options');
 
   // Set default mood
   setDefaultMood();
