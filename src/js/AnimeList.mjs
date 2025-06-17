@@ -1,3 +1,5 @@
+import { UIHandler } from './UIHandler.mjs';
+
 export function renderAnimeList(containerId, animeArray) {
   const wrapper = document.getElementById(containerId);
   const container = wrapper?.querySelector('.anime-cards');

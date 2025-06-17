@@ -1,9 +1,12 @@
 // UIHandler.mjs - Animations & dynamic UI updates
 
 export const UIHandler = {
+  toastQueue: new Set(),
+
   init() {
     this.setupAnimations();
     this.observeTrendingBadges();
+    this.setupToastContainer();
   },
 
   setupAnimations() {
@@ -14,9 +17,7 @@ export const UIHandler = {
           entry.target.classList.add('fade-in-active');
         }
       });
-    }, {
-      threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     animatableElements.forEach(el => observer.observe(el));
   },
@@ -28,28 +29,44 @@ export const UIHandler = {
     });
   },
 
+  setupToastContainer() {
+    if (!document.querySelector('.toast-container')) {
+      const container = document.createElement('div');
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+  },
+
   showToast(message, type = 'info') {
+    const key = `${type}:${message}`;
+    if (this.toastQueue.has(key)) return;
+
+    this.toastQueue.add(key);
+
+    const container = document.querySelector('.toast-container');
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
-    document.body.appendChild(toast);
+
+    container.appendChild(toast);
 
     setTimeout(() => {
       toast.classList.add('visible');
+
+      // Remove toast after it shows
       setTimeout(() => {
         toast.classList.remove('visible');
-        setTimeout(() => toast.remove(), 300);
+        setTimeout(() => {
+          toast.remove();
+          this.toastQueue.delete(key);
+        }, 300);
       }, 3000);
-    }, 100);
+    }, 50);
   },
 
   toggleLoading(state, targetId) {
     const target = document.getElementById(targetId);
     if (!target) return;
-    if (state) {
-      target.classList.add('loading');
-    } else {
-      target.classList.remove('loading');
-    }
+    target.classList.toggle('loading', state);
   }
 };

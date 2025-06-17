@@ -1,4 +1,5 @@
 // WatchlistManager.mjs - Manages user watchlist & localStorage
+import { UIHandler } from './UIHandler.mjs';
 
 const WATCHLIST_KEY = 'anivibes_watchlist';
 
@@ -63,6 +64,7 @@ export const WatchlistManager = {
       removeBtn.addEventListener('click', () => {
         this.removeFromWatchlist(anime.mal_id);
         this.renderWatchlist();
+        UIHandler.showToast('Anime removed successfully');
       });
 
       li.appendChild(img);

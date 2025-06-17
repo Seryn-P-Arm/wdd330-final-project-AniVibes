@@ -1,3 +1,5 @@
+import { UIHandler } from './UIHandler.mjs';
+
 export function renderSnackSuggestions(containerId, snacks) {
   const containerWrapper = document.getElementById(containerId);
   if (!containerWrapper) return;
@@ -31,6 +33,22 @@ export function renderSnackSuggestions(containerId, snacks) {
         <a href="${snack.sourceUrl}" target="_blank" rel="noopener noreferrer" class="recipe-link">View Full Recipe 🍽️</a>
       </div>
     `;
+
+    const addButton = document.createElement('button');
+    addButton.textContent = 'Add to Snack Plan 🛒';
+    addButton.classList.add('add-snack-btn');
+    addButton.addEventListener('click', () => {
+      const existing = JSON.parse(localStorage.getItem('snacks')) || [];
+      const alreadyAdded = existing.some(s => s.id === snack.id);
+      if (!alreadyAdded) {
+        existing.push(snack);
+        localStorage.setItem('snacks', JSON.stringify(existing));
+        UIHandler.showToast(`${snack.title} added to your snack plan! 🎉`);
+      } else {
+        UIHandler.showToast(`${snack.title} is already in your snack plan! 📝`);
+      }
+    });
+    card.appendChild(addButton);
 
     snackGrid.appendChild(card);
   });
