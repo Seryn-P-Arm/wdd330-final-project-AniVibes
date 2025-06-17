@@ -1,11 +1,11 @@
 // SessionPlanner.mjs - Builds the anime + snack watch session timeline
 import { UIHandler } from './UIHandler.mjs';
-import { WatchlistManager } from './WatchListManager.mjs'; // WatchListManager → WatchlistManager (consistent casing)
+import { WatchlistManager } from './WatchListManager.mjs';
 
 export function buildSessionTimeline(containerId, watchlist, snacks) {
   const section = document.getElementById(containerId);
   const container = section.querySelector('.session-output');
-  container.innerHTML = ''; // ✨ Clear the container
+  container.innerHTML = '';
 
   if (!watchlist || watchlist.length === 0) {
     container.innerHTML = '<p>Your session is empty. Add anime to get started!</p>';
@@ -16,7 +16,7 @@ export function buildSessionTimeline(containerId, watchlist, snacks) {
   const timeline = document.createElement('div');
   timeline.classList.add('timeline');
 
-  // 🍿 Loop through each anime and build timeline blocks
+  // Loop through each anime and build timeline blocks
   watchlist.forEach((anime, index) => {
     const block = document.createElement('div');
     block.classList.add('timeline-block');
@@ -32,7 +32,7 @@ export function buildSessionTimeline(containerId, watchlist, snacks) {
     timeline.appendChild(block);
   });
 
-  // 🍱 Snack Section: A standalone visual summary of all snacks
+  // Snack Section: A standalone visual summary of all snacks
   if (snacks && snacks.length > 0) {
     const snackSection = document.createElement('div');
     snackSection.classList.add('snack-section');
@@ -59,7 +59,7 @@ export function buildSessionTimeline(containerId, watchlist, snacks) {
     container.appendChild(snackSection);
   }
 
-  // 📅 Total Watch Time Summary
+  // Total Watch Time Summary
   const summary = document.createElement('div');
   summary.classList.add('timeline-summary');
   summary.innerHTML = `<h3>Total Watch Time: ${totalTime} mins</h3>`;
@@ -67,7 +67,7 @@ export function buildSessionTimeline(containerId, watchlist, snacks) {
   container.appendChild(timeline);
   container.appendChild(summary);
 
-  // 🧹 Clear snack plan listener
+  // Clear snack plan listener
   document.getElementById('clear-snacks')?.addEventListener('click', () => {
   localStorage.removeItem('snacks');
 

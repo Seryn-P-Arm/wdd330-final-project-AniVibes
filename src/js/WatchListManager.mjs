@@ -40,7 +40,7 @@ export const WatchlistManager = {
     const container = document.querySelector('.watchlist-items');
     if (!container) return;
 
-    container.innerHTML = ''; // Clear existing items first
+    container.innerHTML = ''; // Clear existing items
 
     watchlist.forEach(anime => {
       const li = document.createElement('li');
@@ -51,7 +51,7 @@ export const WatchlistManager = {
       titleSpan.classList.add('watchlist-title');
       titleSpan.textContent = anime.title;
 
-      // Optional: Add poster image
+      // Add poster image
       const img = document.createElement('img');
       img.src = anime.images?.jpg?.image_url || '';
       img.alt = anime.title;

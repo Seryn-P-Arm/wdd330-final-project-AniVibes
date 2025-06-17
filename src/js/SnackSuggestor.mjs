@@ -1,5 +1,7 @@
+// SnackSuggestor.mjs module - Handles Snack Pairings depending on the Mood and Genre
 import { UIHandler } from './UIHandler.mjs';
 
+// Render Snack Suggestions/Pairings
 export function renderSnackSuggestions(containerId, snacks) {
   const containerWrapper = document.getElementById(containerId);
   if (!containerWrapper) return;
@@ -17,10 +19,12 @@ export function renderSnackSuggestions(containerId, snacks) {
     return;
   }
 
+  // Create a Snack Grid
   container.innerHTML = '';
   const snackGrid = document.createElement('div');
   snackGrid.classList.add('snack-grid');
 
+  // Loop through the snack list to create a card for each one
   snacks.forEach(snack => {
     const card = document.createElement('div');
     card.classList.add('snack-card');
@@ -34,6 +38,7 @@ export function renderSnackSuggestions(containerId, snacks) {
       </div>
     `;
 
+    // Create a button that will Add the Snack to Watchlist
     const addButton = document.createElement('button');
     addButton.textContent = 'Add to Snack Plan 🛒';
     addButton.classList.add('add-snack-btn');

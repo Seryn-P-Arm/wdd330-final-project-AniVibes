@@ -46,7 +46,6 @@ export function getSelectedMood() {
   return selectedMood;
 }
 
-// Optionally preload with a default mood
 export function setDefaultMood(mood = 'relaxing') {
   selectMood(mood);
 }
@@ -56,13 +55,12 @@ export function setupMoodSelector(callback) {
   const container = document.querySelector('#mood-selector .mood-options');
   renderMoodOptions('.mood-options');
 
-  // Set default mood
   setDefaultMood();
 
   // Listen for mood selection changes
   document.addEventListener('moodSelected', (event) => {
     const selectedMood = event.detail.mood;
-    const selectedGenre = null; // You can update this later when genre is hooked up
+    const selectedGenre = null;
     callback(selectedMood, selectedGenre);
   });
 }

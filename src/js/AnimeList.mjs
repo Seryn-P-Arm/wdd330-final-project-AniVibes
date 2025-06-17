@@ -1,5 +1,3 @@
-import { UIHandler } from './UIHandler.mjs';
-
 export function renderAnimeList(containerId, animeArray) {
   const wrapper = document.getElementById(containerId);
   const container = wrapper?.querySelector('.anime-cards');
@@ -43,7 +41,7 @@ export function renderAnimeList(containerId, animeArray) {
     }
   });
 
-  // ✅ Only dispatch the event
+  // Dispatch the event
   container.querySelectorAll('.add-watchlist').forEach(button => {
     button.addEventListener('click', () => {
       const id = button.getAttribute('data-id');

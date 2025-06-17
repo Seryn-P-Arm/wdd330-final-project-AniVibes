@@ -2,7 +2,7 @@
 
 const JIKAN_BASE_URL = 'https://api.jikan.moe/v4';
 const SPOONACULAR_BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-const SPOONACULAR_API_KEY = '7525781dd26f4eef944def629207535e'; // Replace with actual key
+const SPOONACULAR_API_KEY = '7525781dd26f4eef944def629207535e';
 
 // Fetch anime based on mood and optional genre
 export async function fetchAnimeByMood(mood, genre) {
@@ -24,7 +24,7 @@ export async function fetchSnacksByMood(mood) {
     const res = await fetch(url);
     const data = await res.json();
 
-    // Now fetch full details for each snack
+    // Fetch details for each snack
     const snacksWithDetails = await Promise.all(
       data.results.map(async (snack) => {
         const detailUrl = `https://api.spoonacular.com/recipes/${snack.id}/information?apiKey=${SPOONACULAR_API_KEY}`;

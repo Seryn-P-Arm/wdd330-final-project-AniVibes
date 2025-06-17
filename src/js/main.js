@@ -1,12 +1,12 @@
 // main.js - Entry Point for AniVibes Web Application
 
-import { fetchAnimeByMood, fetchSnacksByMood } from './APImanager.mjs';  // Fix casing: APImanager → APIManager
+import { fetchAnimeByMood, fetchSnacksByMood } from './APImanager.mjs';
 import { setupMoodSelector } from './MoodSelector.mjs';
 import { renderMoodOptions, setDefaultMood } from './MoodSelector.mjs';
 import { renderGenreOptions } from './GenreSelector.mjs';
 import { renderAnimeList } from './AnimeList.mjs';
 import { renderSnackSuggestions } from './SnackSuggestor.mjs';
-import { WatchlistManager } from './WatchListManager.mjs'; // WatchListManager → WatchlistManager (consistent casing)
+import { WatchlistManager } from './WatchListManager.mjs';
 import { buildSessionTimeline } from './SessionPlanner.mjs';
 import { UIHandler } from './UIHandler.mjs';
 import { loadFromLocalStorage } from './utils.mjs';
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('AniVibes App Loaded');
 
   renderMoodOptions('.mood-options');
-  setDefaultMood(); // optionally set initial mood
+  setDefaultMood();
 
   renderGenreOptions('.genre-options');
 
@@ -34,29 +34,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const animeResults = await fetchAnimeByMood(currentMood, currentGenre);
     console.log('🎥 Anime fetched:', animeResults);
 
-    renderAnimeList('anime-list', animeResults); // 💥 Fixed
+    renderAnimeList('anime-list', animeResults);
 
     const snackResults = await fetchSnacksByMood(currentMood);
-    renderSnackSuggestions('snack-suggestions', snackResults); // Consistent and happy
+    renderSnackSuggestions('snack-suggestions', snackResults);
   }
-
 
   // Setup UI elements and event listeners
   setupMoodSelector(async (selectedMood) => {
     console.log("🧠 Mood selected:", selectedMood);
     currentMood = selectedMood;
-    await updateRecommendations(); // call the unified updater
+    await updateRecommendations();
   });
 
-  // Load existing watchlist from storage or wherever your WatchlistManager does it
+  // Load existing watchlist from storage
   WatchlistManager.renderWatchlist();
 
   // Initialize session planner functionality
   document.getElementById('generate-session').addEventListener('click', () => {
-    // Load watchlist from localStorage or get from WatchlistManager (depending on your setup) 
+    // Load watchlist from localStorage
     const watchlist = WatchlistManager.getWatchlist();
 
-    // Load snacks from localStorage — here's the magic line you asked about
+    // Load snacks from localStorage
     const snacks = loadFromLocalStorage('snacks');
 
     buildSessionTimeline('session-plan', watchlist, snacks);
