@@ -2,7 +2,7 @@
 
 const JIKAN_BASE_URL = 'https://api.jikan.moe/v4';
 const SPOONACULAR_BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-const SPOONACULAR_API_KEY = '7525781dd26f4eef944def629207535e';
+const SPOONACULAR_API_KEY = '86c95aefa3964dab903eaab6ac9a070d';
 
 // Fetch anime based on mood and optional genre
 export async function fetchAnimeByMood(mood, genre) {
